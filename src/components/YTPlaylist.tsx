@@ -90,6 +90,17 @@ export const YTPlaylist: React.FC = () => {
   return (
     <>
       <div className="p-4 sm:p-10">
+        <div className="flex justify-end">
+          <a
+            href="https://www.buymeacoffee.com/YouShuffle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center px-3 py-1 font-semibold text-gray-800 transition-transform transform bg-yellow-400 rounded-full shadow-md sm:px-4 sm:py-2 text-nowrap w-min hover:bg-yellow-300 hover:scale-105">
+            <span className="mr-2">☕</span>
+            <span className="inline text-xs sm:text-md">Buy me a coffee!</span>
+          </a>
+        </div>
+
         <p className="mt-8 mb-4 font-light text-center text-gray-700 md:text-2xl dark:text-slate-300">
           It’s easy! Just enter the <span className="font-black">Playlist URL</span>, and
           you’re all set.
