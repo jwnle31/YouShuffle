@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# YouShuffle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Tools Used](https://skillicons.dev/icons?i=react,ts,tailwind,vite,vercel&theme=light)
 
-Currently, two official plugins are available:
+YouShuffle is a React app that lets you manage and play YouTube playlists. Simply enter a playlist URL, and the app fetches the videos, allowing you to shuffle, sort, and play them directly within the app. While YouTube's shuffling feature can sometimes be unpredictable, YouShuffle enhances this experience by offering a more consistent and user-friendly way to shuffle your playlists. It also caches playlists for quick access, making it a convenient tool for managing your YouTube playlists more effectively.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Screenshots
 
-## Expanding the ESLint configuration
+### Desktop
+<div style="display: flex; justify-content: space-between;">
+  <img src="public/light-desktop.png" alt="light-desktop" style="width: 45%;"/>
+  <img src="public/dark-desktop.png" alt="dark-desktop" style="width: 45%;"/>
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Mobile
+<div style="display: flex; justify-content: space-between;">
+  <img src="public/light-mobile.png" alt="light-desktop" style="width: 45%;"/>
+  <img src="public/dark-mobile.png" alt="dark-desktop" style="width: 45%;"/>
+</div>
 
-- Configure the top-level `parserOptions` property like this:
+## Getting started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Create the project.
+
+   ```bash
+   npx degit jwnle31/YouShuffle my-app
+   ```
+
+2. Access the project directory.
+
+   ```bash
+   cd my-app
+   ```
+
+3. Initialize a git repository.
+
+   ```bash
+   git init
+   ```
+
+4. Install dependencies.
+
+   ```bash
+   npm install
+   ```
+
+5. Start dev server with hot reload at http://localhost:3000.
+   ```bash
+   npm run dev
+   ```
+
+## Recommended VS Code extensions
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+## Other commands
+
+### Lint commands
+
+```bash
+npm run lint
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Build commands
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run build
 ```
