@@ -27,7 +27,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             id="simple-search"
             ref={inputRef}
             className="playlist-input bg-slate-50 border shadow-inner text-gray-900 text-xs sm:text-xl rounded-lg block w-full ps-8 sm:ps-14 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-            placeholder="https://www.youtube.com/playlist?list=⭐"
+            placeholder="https://www.youtube.com/playlist?list=..."
             required
           />
         </div>
