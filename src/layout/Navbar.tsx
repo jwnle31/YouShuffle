@@ -35,7 +35,9 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="bg-opacity-50 border-gray-200 navbar bg-gray-50 dark:bg-gray-800 dark:bg-opacity-50">
       <div className="flex flex-wrap items-center justify-between p-3 mx-auto sm:p-8">
-        <a href="#" className="flex items-center px-3 space-x-3 sm:text-2xl">
+        <a
+          href={window.location.href}
+          className="flex items-center px-3 space-x-3 sm:text-2xl">
           <Logo className="w-10 fill-current text-yt-red h-9" />
           <span className="self-center font-bold text-gray-700 whitespace-nowrap dark:text-white">
             YouShuffle
