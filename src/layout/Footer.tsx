@@ -25,13 +25,17 @@ export const Footer: React.FC = () => {
             <div className="w-px bg-gray-400 h-14 dark:bg-gray-200"></div>
           </li>
           <li className="relative flex items-center ms-2 me-5">
-            <a href="#" className="flex items-center text-gray-700 dark:text-white">
+            <a
+              href="https://github.com/jwnle31/YouShuffle"
+              className="flex items-center text-gray-700 dark:text-white"
+              target="_blank"
+              rel="noopener noreferrer">
               <FaGithub className="w-6 h-6 sm:w-9 sm:h-9" />
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href="mailto:YouShuffleContact@gmail.com"
               className="flex items-center text-gray-700 dark:text-white ms-2 me-3">
               <FaRegEnvelope className="w-6 h-6 sm:w-9 sm:h-9" />
             </a>
