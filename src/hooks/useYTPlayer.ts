@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, MutableRefObject } from 'react'
+import { useState, useRef, useEffect, useCallback, MutableRefObject } from 'react'
 import type { Player, PlaylistItem } from '../interfaces'
 
 export type UseYTPlayerParams = {
@@ -15,20 +15,23 @@ export const useYTPlayer = ({
   const [playerReady, setPlayerReady] = useState<boolean>(false)
   const playerRef = useRef<Player | null>(null)
 
-  const handleVideoChange = (event: { data: number }) => {
-    if (
-      event.data === window.YT.PlayerState.ENDED ||
-      event.data === window.YT.PlayerState.ERROR
-    ) {
-      setCurrentIndex(prevIndex => {
-        const newIndex = (prevIndex + 1) % playlistData.length
-        playerRef.current?.loadVideoById(
-          playlistData[newIndex].snippet.resourceId.videoId
-        )
-        return newIndex
-      })
-    }
-  }
+  const handleVideoChange = useCallback(
+    (event: { data: number }) => {
+      if (
+        event.data === window.YT.PlayerState.ENDED ||
+        event.data === window.YT.PlayerState.ERROR
+      ) {
+        setCurrentIndex(prevIndex => {
+          const newIndex = (prevIndex + 1) % playlistData.length
+          playerRef.current?.loadVideoById(
+            playlistData[newIndex].snippet.resourceId.videoId
+          )
+          return newIndex
+        })
+      }
+    },
+    [playlistData, setCurrentIndex]
+  )
 
   useEffect(() => {
     if (window.YT && window.YT.Player) {
@@ -75,7 +78,7 @@ export const useYTPlayer = ({
         }
       })
     }
-  }, [playlistData, playerReady])
+  }, [playlistData, playerReady, handleVideoChange, setCurrentIndex])
 
   return playerRef
 }
