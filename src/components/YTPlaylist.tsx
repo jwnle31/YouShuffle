@@ -50,7 +50,6 @@ export const YTPlaylist: React.FC = () => {
         setIsAscending(true)
         setPlaylistInfo(cachedData.info)
         setPlaylistData(cachedData.items)
-        console.log('from cache')
         toggleLoading()
         return
       }
@@ -78,7 +77,6 @@ export const YTPlaylist: React.FC = () => {
           updateCache(id, infoResponse.data, itemsResponse.data)
           setPlaylistInfo(infoResponse.data)
           setPlaylistData(itemsResponse.data)
-          console.log('from API')
         }
       }
     } catch (err) {
