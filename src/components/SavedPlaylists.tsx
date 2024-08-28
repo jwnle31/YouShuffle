@@ -19,7 +19,7 @@ export const SavedPlaylists: React.FC<SavedPlaylistsProps> = ({
   return (
     <div className="mt-10">
       <Foldable title="Saved Playlists" className="mb-10">
-        <div className="flex p-4 pb-5 mb-2 space-x-4 overflow-x-auto custom-scrollbar">
+        <div className="flex p-4 pb-5 mx-auto mb-2 space-x-4 overflow-x-auto w-min custom-scrollbar">
           {Object.keys(cache).map(id => (
             <PlaylistCard
               key={id}
