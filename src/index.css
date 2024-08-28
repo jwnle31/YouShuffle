@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+.preload {
+  transition: none !important;
+}
+
+body {
+  background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899),
+    rgba(255, 255, 255, 0.8);
+  background-blend-mode: overlay;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+body.dark {
+  background: linear-gradient(to right, #1e3a8a, #4c1d95, #be185d), rgba(0, 0, 0, 0.8);
+  background-blend-mode: overlay;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#logo {
+  color: #b2071d;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.content.open {
+  grid-template-rows: 1fr;
+}
+
+.inner {
+  min-height: 0;
+}
+
+.grid-scrollable {
+  overflow-x: auto;
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::before {
+  content: '';
+  position: absolute;
+  top: -50%; /* Start the shine above the button */
+  left: -50%; /* Start the shine off-screen to the left */
+  width: 200%; /* Extend the shine across the button */
+  height: 200%; /* Ensure the shine covers the entire button */
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.1) 60%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.7s;
+}
+
+.shine-effect:hover::before {
+  left: 150%; /* Move the shine off-screen to the right */
+  transition: left 0.7s;
+}
+
+/* styles.css */
+.icon-container {
+  position: relative;
+  width: 24px; /* Adjust to your icon size */
+  height: 24px;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease,
+    color 0.3s ease;
+}
+
+.icon.sun {
+  opacity: 1;
+  visibility: visible;
+}
+
+.icon.moon {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.icon-container.dark .icon.sun {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.icon-container.dark .icon.moon {
+  opacity: 1;
+  visibility: visible;
+}
