@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Player, PlaylistItem, PlaylistInfo } from '../interfaces'
+import type { Player, PlaylistItem } from '../interfaces'
 import type { CacheEntry } from '.'
 
 export type SortMethod = 'default' | 'random' | 'title' | 'publishDate' | 'owner'
