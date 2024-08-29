@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import type { PlaylistInfo, PlaylistItem } from '../interfaces'
+import type { SortMethod } from '.'
 
 export type CacheEntry = {
   info: PlaylistInfo
   items: PlaylistItem[]
+  session: {
+    sort: SortMethod
+    isAscending: boolean
+    items: PlaylistItem[]
+  }
 }
 
 export const useCache = () => {
@@ -17,19 +23,29 @@ export const useCache = () => {
   const addCache = (id: string, info: PlaylistInfo, items: PlaylistItem[]) => {
     const newCache = {
       ...cache,
-      [id]: { info, items, session: { sort: 'default', items } }
+      [id]: {
+        info,
+        items,
+        session: { sort: 'default' as SortMethod, isAscending: true, items }
+      }
     }
     setCache(newCache)
     localStorage.setItem('playlistCache', JSON.stringify(newCache))
   }
 
-  const updateCache = (id: string, sort: string, items: PlaylistItem[]) => {
+  const updateCache = (
+    id: string,
+    sort: SortMethod,
+    isAscending: boolean,
+    items: PlaylistItem[]
+  ) => {
     const newCache = {
       ...cache,
       [id]: {
         ...cache[id],
         session: {
           sort,
+          isAscending,
           items
         }
       }

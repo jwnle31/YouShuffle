@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import type { Player, PlaylistItem, PlaylistInfo } from '../interfaces'
+import type { CacheEntry } from '.'
 
-type SortMethod = 'default' | 'random' | 'title' | 'publishDate' | 'owner'
+export type SortMethod = 'default' | 'random' | 'title' | 'publishDate' | 'owner'
 
 export const useSort = (
   setPlaylistData: React.Dispatch<React.SetStateAction<PlaylistItem[]>>,
   playerRef: React.RefObject<Player>,
   currentIndex: number,
-  cache: { [key: string]: { info: PlaylistInfo; items: PlaylistItem[] } },
+  cache: { [key: string]: CacheEntry },
+  updateCache: (
+    id: string,
+    sort: SortMethod,
+    isAscending: boolean,
+    items: PlaylistItem[]
+  ) => void,
   playlistId: string,
   sortRef: React.RefObject<HTMLSelectElement>
 ) => {
@@ -44,7 +51,9 @@ export const useSort = (
       case 'default':
       default:
     }
-    return ascending ? sortedItems : sortedItems.reverse()
+    sortedItems = ascending ? sortedItems : sortedItems.reverse()
+    updateCache(playlistId, method, ascending, sortedItems)
+    return sortedItems
   }
 
   const toggleSortOrder = () => {

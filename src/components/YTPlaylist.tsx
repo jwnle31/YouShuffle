@@ -33,7 +33,15 @@ export const YTPlaylist: React.FC = () => {
     toggleSortOrder,
     handleSortChange,
     handleShuffle
-  } = useSort(setPlaylistData, playerRef, currentIndex, cache, playlistId, sortRef)
+  } = useSort(
+    setPlaylistData,
+    playerRef,
+    currentIndex,
+    cache,
+    updateCache,
+    playlistId,
+    sortRef
+  )
 
   const handleFetch = async () => {
     const id = extractPlaylistId(inputRef.current?.value.trim() || '')
@@ -46,10 +54,10 @@ export const YTPlaylist: React.FC = () => {
 
       const cachedData = cache[id]
       if (cachedData) {
-        setSortMethod('default')
-        setIsAscending(true)
+        setSortMethod(cachedData.session.sort)
         setPlaylistInfo(cachedData.info)
-        setPlaylistData(cachedData.items)
+        setPlaylistData(cachedData.session.items)
+        setIsAscending(cachedData.session.isAscending)
         toggleLoading()
         return
       }
@@ -64,6 +72,7 @@ export const YTPlaylist: React.FC = () => {
 
   const handleUpdatePlaylist = async (id: string) => {
     setSortMethod('default')
+    setIsAscending(true)
     try {
       const [infoResponse, itemsResponse] = await Promise.all([
         fetchPlaylistInfo(id),
