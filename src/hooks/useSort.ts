@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Player, PlaylistItem, PlaylistInfo } from '../interfaces'
 
-type SortMethod = 'original' | 'random' | 'title' | 'publishDate' | 'owner'
+type SortMethod = 'default' | 'random' | 'title' | 'publishDate' | 'owner'
 
 export const useSort = (
   setPlaylistData: React.Dispatch<React.SetStateAction<PlaylistItem[]>>,
@@ -11,7 +11,7 @@ export const useSort = (
   playlistId: string,
   sortRef: React.RefObject<HTMLSelectElement>
 ) => {
-  const [sortMethod, setSortMethod] = useState<SortMethod>('original')
+  const [sortMethod, setSortMethod] = useState<SortMethod>('default')
   const [isAscending, setIsAscending] = useState(true)
 
   const sortPlaylistData = (method: SortMethod, ascending: boolean): PlaylistItem[] => {
@@ -41,7 +41,7 @@ export const useSort = (
           return ownerA < ownerB ? -1 : ownerA > ownerB ? 1 : 0
         })
         break
-      case 'original':
+      case 'default':
       default:
     }
     return ascending ? sortedItems : sortedItems.reverse()
@@ -56,7 +56,7 @@ export const useSort = (
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newSortMethod = event.target.value as
-      | 'original'
+      | 'default'
       | 'random'
       | 'title'
       | 'publishDate'

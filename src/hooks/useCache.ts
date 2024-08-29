@@ -14,13 +14,28 @@ export const useCache = () => {
     return storedCache ? JSON.parse(storedCache) : {}
   })
 
-  const updateCache = (id: string, info: PlaylistInfo, items: PlaylistItem[]) => {
-    const updatedCache = {
+  const addCache = (id: string, info: PlaylistInfo, items: PlaylistItem[]) => {
+    const newCache = {
       ...cache,
-      [id]: { info, items }
+      [id]: { info, items, session: { sort: 'default', items } }
     }
-    setCache(updatedCache)
-    localStorage.setItem('playlistCache', JSON.stringify(updatedCache))
+    setCache(newCache)
+    localStorage.setItem('playlistCache', JSON.stringify(newCache))
+  }
+
+  const updateCache = (id: string, sort: string, items: PlaylistItem[]) => {
+    const newCache = {
+      ...cache,
+      [id]: {
+        ...cache[id],
+        session: {
+          sort,
+          items
+        }
+      }
+    }
+    setCache(newCache)
+    localStorage.setItem('playlistCache', JSON.stringify(newCache))
   }
 
   const deleteCache = (id: string) => {
@@ -32,6 +47,7 @@ export const useCache = () => {
 
   return {
     cache,
+    addCache,
     updateCache,
     deleteCache
   }

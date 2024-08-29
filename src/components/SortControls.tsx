@@ -2,7 +2,7 @@ import React from 'react'
 import { FaRandom, FaSortAlphaDown, FaSortAlphaUp, FaList } from 'react-icons/fa'
 
 interface SortControlsProps {
-  sortMethod: 'original' | 'random' | 'title' | 'publishDate' | 'owner'
+  sortMethod: 'default' | 'random' | 'title' | 'publishDate' | 'owner'
   isAscending: boolean
   onSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   onShuffle: () => void
@@ -27,7 +27,7 @@ export const SortControls: React.FC<SortControlsProps> = ({
           value={sortMethod}
           onChange={onSortChange}
           className="w-full p-2 text-gray-700 bg-transparent border-none dark:focus:bg-gray-800 dark:text-slate-300 dark:focus:border-slate-700">
-          <option value="original">Default</option>
+          <option value="default">Default</option>
           <option value="random">Random</option>
           <option value="title">Title</option>
           <option value="publishDate">Publish Date</option>

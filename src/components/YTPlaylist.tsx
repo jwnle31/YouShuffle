@@ -17,7 +17,7 @@ export const YTPlaylist: React.FC = () => {
   const [playlistId, setPlaylistId] = useState<string>('')
   const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo | null>(null)
   const [playlistData, setPlaylistData] = useState<PlaylistItem[]>([])
-  const { cache, updateCache, deleteCache } = useCache()
+  const { cache, addCache, updateCache, deleteCache } = useCache()
   const [loading, toggleLoading] = useToggle()
   const [error, setError] = useState<string | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -46,7 +46,7 @@ export const YTPlaylist: React.FC = () => {
 
       const cachedData = cache[id]
       if (cachedData) {
-        setSortMethod('original')
+        setSortMethod('default')
         setIsAscending(true)
         setPlaylistInfo(cachedData.info)
         setPlaylistData(cachedData.items)
@@ -63,7 +63,7 @@ export const YTPlaylist: React.FC = () => {
   }
 
   const handleUpdatePlaylist = async (id: string) => {
-    setSortMethod('original')
+    setSortMethod('default')
     try {
       const [infoResponse, itemsResponse] = await Promise.all([
         fetchPlaylistInfo(id),
@@ -74,7 +74,7 @@ export const YTPlaylist: React.FC = () => {
         setError(infoResponse.error || itemsResponse.error || 'Unknown error')
       } else {
         if (infoResponse.data && itemsResponse.data) {
-          updateCache(id, infoResponse.data, itemsResponse.data)
+          addCache(id, infoResponse.data, itemsResponse.data)
           setPlaylistInfo(infoResponse.data)
           setPlaylistData(itemsResponse.data)
         }
