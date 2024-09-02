@@ -15,6 +15,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   error,
   inputRef
 }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onFetch()
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col max-w-4xl gap-2 mx-auto mb-3 sm:flex-row sm:items-center">
@@ -26,6 +32,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             type="text"
             id="simple-search"
             ref={inputRef}
+            onKeyDown={handleKeyDown} // Add the onKeyDown event handler
             className="playlist-input bg-slate-50 border shadow-inner text-gray-900 text-xs sm:text-xl rounded-lg block w-full ps-8 sm:ps-14 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             placeholder="https://www.youtube.com/playlist?list=..."
             required
