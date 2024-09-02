@@ -51,7 +51,7 @@ export const VideoList: React.FC<VideoListProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="absolute text-red-500 transition-colors duration-200 bottom-2 right-2 hover:text-red-600">
-              <FaYoutube size={20} />
+              <FaYoutube size={14} />
             </a>
           </li>
         ))}
