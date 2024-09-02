@@ -43,11 +43,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           className="flex items-center max-w-4xl p-4 mx-auto mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
           role="alert">
           <FaCircleInfo className="flex-shrink-0 w-6 h-6 me-4" />
-          <div>
-            <span className="font-bold">Uh-oh!</span> We couldn’t find the playlist. Make
-            sure you’re using a <span className="font-bold">Valid URL or ID</span>, then
-            give it another go.
-          </div>
+          <div>{error}</div>
         </div>
       )}
     </>

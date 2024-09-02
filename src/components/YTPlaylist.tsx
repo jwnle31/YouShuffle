@@ -8,7 +8,7 @@ import {
   VideoInfoCard,
   VideoList
 } from '.'
-import { useCache, useSort, useToggle, useYTPlayer } from '../hooks'
+import { useCache, useSort, useYTPlayer } from '../hooks'
 import { extractPlaylistId, fetchPlaylistInfo, fetchAllPlaylistItems } from '../utils'
 
 export const YTPlaylist: React.FC = () => {
@@ -18,7 +18,7 @@ export const YTPlaylist: React.FC = () => {
   const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo | null>(null)
   const [playlistData, setPlaylistData] = useState<PlaylistItem[]>([])
   const { cache, addCache, updateCache, deleteCache } = useCache()
-  const [loading, toggleLoading] = useToggle()
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const playerRef = useYTPlayer({
@@ -49,17 +49,22 @@ export const YTPlaylist: React.FC = () => {
       setPlaylistId(id)
       setPlaylistInfo(null)
       setPlaylistData([])
-      toggleLoading()
+      setLoading(true)
       setError(null)
 
       const cachedData = cache[id]
       if (cachedData) {
-        setSortMethod(cachedData.session.sort)
-        setPlaylistInfo(cachedData.info)
-        setPlaylistData(cachedData.session.items)
-        setIsAscending(cachedData.session.isAscending)
-        toggleLoading()
-        return
+        try {
+          setSortMethod(cachedData.session.sort)
+          setPlaylistInfo(cachedData.info)
+          setPlaylistData(cachedData.session.items)
+          setIsAscending(cachedData.session.isAscending)
+        } catch {
+          setError('An unexpected error occurred. Please update the playlist.')
+        } finally {
+          setLoading(false)
+          return
+        }
       }
       handleUpdatePlaylist(id)
     }
@@ -92,7 +97,7 @@ export const YTPlaylist: React.FC = () => {
       console.error('Error:', err)
       setError('An unexpected error occurred. Please try again.')
     } finally {
-      toggleLoading()
+      setLoading(false)
     }
   }
 
